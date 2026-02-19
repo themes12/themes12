@@ -307,3 +307,8 @@ export async function getTOCSections(postId: string): Promise<TOCSection[]> {
 
   return sections
 }
+
+export async function isGroupedPost(postId: string): Promise<boolean> {
+  const post = await getPostById(postId)
+  return post?.data.grouped || false
+}

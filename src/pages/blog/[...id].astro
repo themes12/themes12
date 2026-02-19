@@ -1,4 +1,5 @@
 ---
+import BlogCard from '@/components/BlogCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PostHead from '@/components/PostHead.astro'
 import PostNavigation from '@/components/PostNavigation.astro'
@@ -17,8 +18,10 @@ import {
   getParentPost,
   getPostReadingTime,
   getSubpostCount,
+  getSubpostsForParent,
   getTOCSections,
   hasSubposts,
+  isGroupedPost,
   isSubpost,
   parseAuthors,
 } from '@/lib/data-utils'
@@ -55,6 +58,10 @@ const combinedReadingTime =
     : null
 
 const tocSections = await getTOCSections(currentPostId)
+const isGrouped = await isGroupedPost(currentPostId)
+const groupedSubposts = isGrouped
+  ? await getSubpostsForParent(currentPostId)
+  : []
 ---
 
 <Layout>
@@ -210,7 +217,22 @@ const tocSections = await getTOCSections(currentPostId)
     </article>
 
     {
-      (hasChildPosts || isCurrentSubpost) && (
+      isGrouped && groupedSubposts.length > 0 && (
+        <section class="col-start-2 flex flex-col gap-y-4">
+          <h2 class="text-xl font-medium">Posts in this series</h2>
+          <ul class="flex flex-col gap-4">
+            {groupedSubposts.map((subpost) => (
+              <li>
+                <BlogCard entry={subpost} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      (hasChildPosts || isCurrentSubpost) && !isGrouped && (
         <SubpostsSidebar
           parentId={
             isCurrentSubpost ? getParentId(currentPostId) : currentPostId
@@ -220,11 +242,15 @@ const tocSections = await getTOCSections(currentPostId)
       )
     }
 
-    <PostNavigation
-      newerPost={navigation.newer}
-      olderPost={navigation.older}
-      parentPost={isCurrentSubpost ? navigation.parent : undefined}
-    />
+    {
+      parseInt(postReadingTime) >= 2 && (
+        <PostNavigation
+          newerPost={navigation.newer}
+          olderPost={navigation.older}
+          parentPost={isCurrentSubpost ? navigation.parent : undefined}
+        />
+      )
+    }
   </section>
 
   <Button
