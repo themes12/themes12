@@ -3,7 +3,7 @@ import type { IconMap, SocialLink, Site } from '@/types'
 export const SITE: Site = {
   title: 't3m.dev',
   description:
-    't3m.dev is a opinionated, unstyled blogging template—built with Astro, Tailwind, and shadcn/ui.',
+    'Personal website and blog of Thiti Phutaarmart — full-stack developer and NLP researcher.',
   href: 'https://t3m.dev',
   author: 'Thiti Phutaarmart',
   locale: 'en-US',
@@ -30,6 +30,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     href: 'mailto:p.thiti@jaist.ac.jp',
     label: 'Email',
+  },
+  {
+    href: 'https://www.linkedin.com/in/thiti-phuttaamart-a1b8971a5',
+    label: 'LinkedIn',
   }
 ]
 

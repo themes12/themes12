@@ -14,49 +14,54 @@ const blog = await getRecentPosts(SITE.featuredPostCount)
   <PageHead slot="head" title="Home" />
   <section class="rounded-lg border">
     <div class="flex flex-col space-y-1.5 p-6">
-      <h3 class="text-3xl leading-none font-medium">er·u·dite</h3>
+      <h3 class="text-3xl leading-none font-medium">Thiti Phutaarmart</h3>
       <p class="text-muted-foreground text-sm">
-        /ˈer(y)əˌdīt/ &bull; <span class="font-medium">adjective</span>
+        Full-Stack Developer &bull; NLP Researcher
       </p>
     </div>
-    <div class="p-6 pt-0">
-      <p class="text-muted-foreground mb-2 text-sm">
-        astro-erudite is an opinionated, unstyled static blogging template built
-        with <Link
-          href="https://astro.build"
-          class="text-foreground"
-          external
-          underline>Astro</Link
-        >, <Link
-          href="https://tailwindcss.com"
-          class="text-foreground"
-          external
-          underline>Tailwind</Link
-        >, and <Link
-          href="https://ui.shadcn.com"
-          class="text-foreground"
-          external
-          underline>shadcn/ui</Link
-        >. Extraordinarily loosely based on the <Link
-          href="https://astro-micro.vercel.app/"
-          class="text-foreground"
-          external
-          underline>Astro Micro</Link
-        > theme.
-      </p>
+    <div class="flex flex-col gap-y-4 p-6 pt-0">
       <p class="text-muted-foreground text-sm">
-        To use this template, check out the <Link
-          href="https://github.com/jktrn/astro-erudite"
+        I'm a full-stack developer and researcher based in Ishikawa, Japan.
+        Currently pursuing a Master's in Information Science at <Link
+          href="https://www.jaist.ac.jp/english/"
           class="text-foreground"
-          underline
-          external>GitHub</Link
-        > repository. To learn more about why this template exists, read this blog
-        post: <Link
-          href="/blog/the-state-of-static-blogs"
-          class="text-foreground"
-          underline>The State of Static Blogs in 2024</Link
-        >.
+          external
+          underline>JAIST</Link
+        >, with a focus on <span class="text-foreground font-medium"
+          >Large Language Models</span
+        >,
+        <span class="text-foreground font-medium"
+          >Natural Language Processing</span
+        >, and
+        <span class="text-foreground font-medium">low-resource languages</span>.
       </p>
+      <div>
+        <p class="text-muted-foreground mb-2 text-sm font-medium">
+          Highlighted Work
+        </p>
+        <ul
+          class="text-muted-foreground list-inside list-disc space-y-1 text-sm"
+        >
+          <li>
+            <span class="text-foreground">DREAM-LLMs (ISWC 2025)</span> — A deliberation-based
+            reasoning ensemble using GPT-4o, Claude 3.5, DeepSeek V3, and Gemini
+            2.5 for term typing in low-resource domains
+          </li>
+          <li>
+            <span class="text-foreground"
+              >Prompt-Tuning-Based LLMs for Term Typing (ISWC 2024)</span
+            > — Prompt-tuning-based approach for large language models
+          </li>
+          <li>
+            <span class="text-foreground">LKS Wallet</span> — Digital payment system
+            serving 3,000+ daily users and processing 220,000+ USD/month
+          </li>
+          <li>
+            <span class="text-foreground">RAG Chatbot</span> — Industrial documentation
+            chatbot built with Python and LangChain at Fufong Labs
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
   <section class="flex flex-col gap-y-4">

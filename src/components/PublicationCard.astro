@@ -1,0 +1,41 @@
+---
+import Link from '@/components/Link.astro'
+import { Badge } from '@/components/ui/badge'
+import { formatDate } from '@/lib/utils'
+import { Icon } from 'astro-icon/components'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+    publication: CollectionEntry<'publications'>
+}
+
+const { publication } = Astro.props
+const { title, venue, description, href, date, authors } = publication.data
+---
+
+<div
+    class="hover:bg-muted/50 rounded-xl border p-4 transition-colors duration-300 ease-in-out"
+>
+    <Link href={href} class="flex flex-col gap-2" external>
+        <div class="flex flex-wrap items-center gap-2">
+            <h3 class="text-lg font-medium">{title}</h3>
+            <Badge variant="muted">
+                <Icon name="lucide:book-open" class="size-3" />
+                {venue}
+            </Badge>
+        </div>
+        <p class="text-muted-foreground text-sm">{description}</p>
+        <div
+            class="text-muted-foreground/70 flex flex-wrap items-center gap-x-3 text-xs"
+        >
+            <span class="flex items-center gap-x-1">
+                <Icon name="lucide:calendar" class="size-3" />
+                {formatDate(date)}
+            </span>
+            <span class="flex items-center gap-x-1">
+                <Icon name="lucide:users" class="size-3" />
+                {authors}
+            </span>
+        </div>
+    </Link>
+</div>
