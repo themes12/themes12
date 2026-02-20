@@ -11,6 +11,7 @@ import rehypeExternalLinks from 'rehype-external-links'
 import rehypeKatex from 'rehype-katex'
 import rehypeShiki from '@shikijs/rehype'
 import remarkEmoji from 'remark-emoji'
+import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 
 import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections'
@@ -34,6 +35,9 @@ export default defineConfig({
   },
   markdown: {
     syntaxHighlight: false,
+    remarkRehype: {
+      footnoteLabel: 'References',
+    },
     rehypePlugins: [
       [
         rehypeExternalLinks,
@@ -102,6 +106,6 @@ export default defineConfig({
         },
       ],
     ],
-    remarkPlugins: [remarkMath, remarkEmoji],
+    remarkPlugins: [remarkMath, remarkEmoji, remarkGfm],
   },
 })

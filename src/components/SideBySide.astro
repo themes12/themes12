@@ -1,0 +1,88 @@
+---
+import { cn } from '@/lib/utils'
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+    leftTitle?: string
+    rightTitle?: string
+    class?: string
+}
+
+const { leftTitle, rightTitle, ...rest } = Astro.props
+---
+
+<div
+    class={cn(
+        'not-prose side-by-side my-6 grid grid-cols-1 gap-x-0 gap-y-4 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]',
+        rest.class,
+    )}
+>
+    <div class="group relative flex flex-col gap-2 px-1">
+        {
+            leftTitle && (
+                <span class="text-muted-foreground text-xs font-medium tracking-wider uppercase">
+                    {leftTitle}
+                </span>
+            )
+        }
+        <div class="prose max-w-none text-sm leading-relaxed" data-copy-target>
+            <slot name="left" />
+        </div>
+        <button
+            class="text-muted-foreground hover:text-foreground absolute top-0 right-0 cursor-pointer rounded-md p-1 opacity-0 transition-opacity group-hover:opacity-100"
+            data-copy-btn
+            title="Copy to clipboard"
+        >
+            <Icon name="lucide:copy" class="size-3.5" />
+        </button>
+    </div>
+
+    <div class="border-border mx-4 hidden border-2 border-l md:block"></div>
+    <hr class="border-border md:hidden" />
+
+    <div class="group relative flex flex-col gap-2 px-1">
+        {
+            rightTitle && (
+                <span class="text-muted-foreground text-xs font-medium tracking-wider uppercase">
+                    {rightTitle}
+                </span>
+            )
+        }
+        <div class="prose max-w-none text-sm leading-relaxed" data-copy-target>
+            <slot name="right" />
+        </div>
+        <button
+            class="text-muted-foreground hover:text-foreground absolute top-0 right-0 cursor-pointer rounded-md p-1 opacity-0 transition-opacity group-hover:opacity-100"
+            data-copy-btn
+            title="Copy to clipboard"
+        >
+            <Icon name="lucide:copy" class="size-3.5" />
+        </button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        document
+            .querySelectorAll('.side-by-side [data-copy-btn]')
+            .forEach((btn) => {
+                btn.addEventListener('click', async () => {
+                    const container =
+                        btn.parentElement?.querySelector('[data-copy-target]')
+                    if (!container) return
+                    const text = container.textContent?.trim() ?? ''
+                    await navigator.clipboard.writeText(text)
+
+                    const icon = btn.querySelector('svg')
+                    if (icon) {
+                        btn.classList.add('!opacity-100')
+                        icon.style.color = 'var(--color-green-500)'
+                        setTimeout(() => {
+                            icon.style.color = ''
+                            btn.classList.remove('!opacity-100')
+                        }, 1500)
+                    }
+                })
+            })
+    })
+</script>
